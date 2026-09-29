@@ -6,6 +6,7 @@ export class LoginPage extends BasePage {
   private readonly passwordInput: Locator;
   private readonly signInButton: Locator;
   private readonly welcomeHeading: Locator;
+  private readonly errorMessage: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -13,6 +14,7 @@ export class LoginPage extends BasePage {
     this.passwordInput = page.getByLabel('Password');
     this.signInButton = page.getByRole('button', { name: 'Sign in' });
     this.welcomeHeading = page.getByRole('heading', { name: /^Welcome,/ });
+    this.errorMessage = page.getByRole('note');
   }
 
   async open(baseUrl: string): Promise<void> {
@@ -40,5 +42,10 @@ export class LoginPage extends BasePage {
   async expectLoginSuccess(): Promise<void> {
     await expect(this.page).toHaveURL(/\/dashboard$/);
     await expect(this.welcomeHeading).toBeVisible();
+  }
+
+  async expectGenericLoginError(): Promise<void> {
+    await expect(this.errorMessage).toHaveText('Invalid email or password.');
+    await expect(this.page).toHaveURL(/\/login$/);
   }
 }
