@@ -26,7 +26,7 @@ Playwright
 | `step-definitions/*.steps.ts` | Translate Gherkin steps into Page Object calls | Touch `this.page` directly, hold locators |
 | `pages/*.ts` | Locators + UI actions/assertions for one page/flow | Reference Gherkin, other Page Objects' internals |
 | `support/world.ts` | Typed Cucumber World: `page`, `context`, `browser`, Page Object instances | Business/test logic |
-| `support/hooks.ts` | Browser/context lifecycle, failure screenshots | Locators, assertions |
+| `support/hooks.ts` | Browser/context lifecycle, failure screenshots, Playwright tracing | Locators, assertions |
 | `support/authSetup.ts` | One-time real login → saved `storageState` | Run on every scenario (only when state is stale/missing) |
 | `config/environment.ts` | Reads `.env`, exposes typed config | Scatter `process.env.X` elsewhere in the codebase |
 | `test-data/*.ts` | Non-secret data generation (Faker) | Hold credentials/secrets |
@@ -62,6 +62,7 @@ To force re-authentication (stale session, changed account): `rm -rf .auth`.
 - `cucumber.js` defines profiles (`default`, `smoke`, `regression`, all excluding `@signup`; plus `signup`, the only one that runs it) and wires three formatters: console progress, `reports/cucumber-report.json`, `reports/cucumber-report.html`.
 - Tags: `@smoke`, `@regression`, `@signup`, `@authenticated`, plus traceability tags like `@ZTM-5` linking a scenario back to an external test-management ticket (e.g. TestRail/Jira).
 - Failure screenshots: `screenshots/failed-<scenario-name>.png`, attached to the Cucumber report automatically.
+- Playwright traces: controlled by `TRACE` (`retain-on-failure` default, `on`, `off`; read via `config.trace`), saved to `reports/traces/<scenario-name>.zip`. Inspect with `npx playwright trace open …` (CLI; `show-trace` is a blocking GUI).
 
 ## Known Application Surface (ZincBank)
 
@@ -82,7 +83,7 @@ Not yet explored: validation/error states on any form (invalid login, failed tra
 
 ## Conventions
 
-- Locators prefer `getByRole` > `getByLabel` > `getByPlaceholder`/`getByText` > CSS. Note: ZincBank's `/login` password field's `<label>` is correctly associated (`getByLabel` works); the email field's is **not** (broken accessibility in the app itself — `getByPlaceholder` used instead, verified against the live DOM).
+- Locators prefer `getByRole` > `getByLabel` > `getByPlaceholder`/`getByText` > CSS. ZincBank's `/login` fields have properly associated `<label>`s (`getByLabel('Email')`, `getByLabel('Password')`, verified against the live DOM on 2026-09-29). An earlier note claimed the email label was broken; that is no longer true. The app also exposes `data-testid` attributes (e.g. `login-email-input`), which rank below semantic locators.
 - No `page.waitForTimeout()` in framework code — rely on Playwright's auto-waiting and `expect(...)` polling.
 - One Page Object per page/flow; step definitions never hold locators.
 - `npx tsc --noEmit` must pass before any scenario is considered done.

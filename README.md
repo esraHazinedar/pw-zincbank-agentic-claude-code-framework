@@ -110,6 +110,16 @@ By default the browser runs headless. To watch it run:
 HEADLESS=false npm run test:smoke
 ```
 
+### Playwright traces
+
+Every scenario is traced. By default (`TRACE=retain-on-failure`) the trace is kept only when the scenario fails, at `reports/traces/<scenario-name>.zip`, next to the failure screenshot. Set `TRACE=on` to keep traces for passing scenarios too, or `TRACE=off` to disable tracing.
+
+```bash
+TRACE=on npx cucumber-js --profile default --name "ZTM-5"
+npx playwright trace open reports/traces/ztm-5-successful-sign-in-redirects-to-the-dashboard.zip
+npx playwright trace actions   # then: action <n>, snapshot <n> --name after, errors, close
+```
+
 ## Reports
 
 Each run generates:

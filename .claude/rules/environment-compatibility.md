@@ -83,7 +83,7 @@ ZincBank (`zincbank.cydeo.io`) is an external, shared site that this repo doesn'
 - CI runs headless by default. Don't set `HEADLESS=false` there.
 - **Never run `@signup` in CI or scheduled runs.** It creates a real account on every run and rewrites `.env`. Every profile except `signup` already excludes it via `--tags "not @signup"` in `cucumber.js`, so `npm test` is safe for CI. Never add a CI step that runs `npm run signup`.
 - CI must run `npx playwright install --with-deps chromium`, because Linux runners need the system libraries as well as the browser.
-- Persist `reports/` and `screenshots/` as build artifacts, so failure screenshots and the HTML report survive after the job ends.
+- Persist `reports/` (which includes `reports/traces/`) and `screenshots/` as build artifacts, so failure traces, screenshots and the HTML report survive after the job ends. Keep the default `TRACE=retain-on-failure` in CI.
 
 ### If Docker is added later
 

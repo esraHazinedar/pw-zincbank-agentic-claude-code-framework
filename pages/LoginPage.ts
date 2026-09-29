@@ -9,7 +9,7 @@ export class LoginPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.emailInput = page.getByPlaceholder('you@example.com');
+    this.emailInput = page.getByLabel('Email');
     this.passwordInput = page.getByLabel('Password');
     this.signInButton = page.getByRole('button', { name: 'Sign in' });
     this.welcomeHeading = page.getByRole('heading', { name: /^Welcome,/ });

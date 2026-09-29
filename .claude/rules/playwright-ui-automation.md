@@ -77,5 +77,6 @@ There is no ad-blocking layer. None has been needed on ZincBank, and no third-pa
 - Screenshots are for diagnosis only:
   - The `After` hook saves a full-page screenshot on failure to `screenshots/failed-<scenario>.png` and attaches it to the Cucumber report.
   - `BasePage.takeScreenshot(name)` is available for ad-hoc debugging. Don't leave calls to it in committed scenarios.
-- `screenshots/` is gitignored.
+- **Playwright traces** are the primary debugging tool. They're kept on failure by default (`TRACE=retain-on-failure`) at `reports/traces/<scenario>.zip`, or for every scenario with `TRACE=on`. Inspect them with `npx playwright trace open` and never `show-trace` (a blocking GUI). The `pw-bdd-debug-scenario` skill runs this loop.
+- `screenshots/`, `reports/` (including traces) and `.playwright-cli/` are gitignored.
 - Verify layout by asserting on DOM state (visibility, text, attributes, counts), never by pixel comparison.

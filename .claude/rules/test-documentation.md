@@ -101,7 +101,7 @@ ZincBank is a shared live site and the test account is real, so exploring the ap
 
 - **Read-only by default.** Loading pages, reading the DOM, and moving between wizard steps without submitting are fine.
 - **Anything that changes state needs the user's explicit go-ahead first:** submitting `/apply` (creates an account), transfers or bill pay, scheduled payments, changing the password, or opening a savings account.
-- Verify a suspicious result independently before documenting it as a defect. Re-check the live DOM, re-run the scenario, and confirm it isn't a locator or timing problem in the framework. Known real app defect: the `/login` email field's `<label>` is not associated with the input (accessibility bug), so `getByPlaceholder` is used.
+- Verify a suspicious result independently before documenting it as a defect. Re-check the live DOM, re-run the scenario, and confirm it isn't a locator or timing problem in the framework. Example of why this matters: an earlier note recorded the `/login` email label as broken, but re-checking the live DOM on 2026-09-29 showed it correctly associated.
 
 ## 6. Keep `ARCHITECTURE.md` in sync
 

@@ -24,7 +24,7 @@ features/*.feature  →  step-definitions/*.steps.ts  →  pages/*.ts  →  Play
 | `step-definitions/*.steps.ts` | Translate a step into Page Object calls | Touch `this.page` directly, declare locators, call `expect` on raw locators |
 | `pages/*.ts` | Locators + actions + `expect*` assertions for one page/flow | Reference Gherkin, reach into another Page Object's internals |
 | `support/world.ts` | Typed per-scenario state | Business/test logic |
-| `support/hooks.ts` | Browser/context lifecycle, failure screenshots | Locators, assertions |
+| `support/hooks.ts` | Browser/context lifecycle, failure screenshots, tracing | Locators, assertions |
 | `support/authSetup.ts` | One-time real login → `.auth/storageState.json` | Run per scenario |
 | `config/environment.ts` | Read `.env`, expose typed `config` | — |
 | `test-data/*.ts` | Faker-generated, non-secret data | Hold credentials |
@@ -70,7 +70,7 @@ There is **no** `@playwright/test` runner and **no** `test.extend()` fixtures. `
 |---|---|---|
 | `BeforeAll` | Once per run | `launchBrowser()` |
 | `Before` (30s timeout) | Per scenario | If tagged `@authenticated`: `ensureAuthenticatedState()` (logs in only if `.auth/` is missing), then new `BrowserContext` with `storageState`. Otherwise a clean context. Then new `Page` |
-| `After` | Per scenario | Full-page screenshot on failure → `screenshots/failed-<scenario>.png`, attached to report; always closes context |
+| `After` | Per scenario | Full-page screenshot on failure → `screenshots/failed-<scenario>.png`, attached to report. Stops tracing: saves `reports/traces/<scenario>.zip` if `TRACE=on`, or on failure with the default `retain-on-failure`. Always closes context |
 | `AfterAll` | Once per run | `closeBrowser()` |
 
 - Never launch a browser or create a context inside step definitions or Page Objects — `support/browser.ts` owns the single `Browser`.
@@ -87,7 +87,7 @@ There is **no** `@playwright/test` runner and **no** `test.extend()` fixtures. `
 
 - Every Page Object `extends BasePage` and takes `page: Page` in its constructor, calling `super(page)`.
 - Locators are declared as `private readonly <name>: Locator` fields and assigned in the constructor. Nothing outside the class reads them.
-- Locator priority: `getByRole` > `getByLabel` > `getByPlaceholder` / `getByText` > CSS. Known exception: the `/login` email field has no associated label (app accessibility bug) — `getByPlaceholder('you@example.com')` is intentional.
+- Locator priority: `getByRole` > `getByLabel` > `getByPlaceholder` / `getByText` > CSS. Both `/login` fields use `getByLabel` (labels verified associated on 2026-09-29). Prefer semantic locators over ZincBank's `data-testid` attributes.
 - All interaction methods are `async` and return `Promise<void>` (or a typed value).
 - Each Page Object owns navigation to its own route via `open(baseUrl)` / `openDirectly(baseUrl)`, built on `BasePage.goto()`. The base URL is passed in from `config.baseUrl` by the step — never hardcoded in the page.
 - Assertions live in Page Objects as methods prefixed `expect*` (e.g. `expectLoginSuccess()`), using `expect` from `@playwright/test`. Steps call these; they never assert on locators themselves.
@@ -123,6 +123,7 @@ Never skip step 2 — an untyped World property defeats strict mode.
 | Profiles | `default`, `smoke`, `regression` (all with `--tags "not @signup"`), and `signup` (`--tags @signup` only) in `cucumber.js` |
 | Formatters | `progress`, `json:reports/cucumber-report.json`, `html:reports/cucumber-report.html` |
 | Browser | Chromium only; headless unless `HEADLESS=false` (exposed as `config.headless`) |
+| Tracing | `TRACE` = `retain-on-failure` (default) / `on` / `off`, exposed as `config.trace`; started in `Before`, saved in `After` |
 | Default step/hook timeout | 15 000 ms (`setDefaultTimeout` in `support/hooks.ts`) |
 | `Before` timeout | 30 000 ms (covers the one-time login) |
 | TypeScript | `strict: true`; every new top-level folder must be added to `tsconfig.json` `include` |

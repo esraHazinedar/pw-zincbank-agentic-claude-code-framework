@@ -35,7 +35,7 @@ page.getByLabel(/Social Security/i)
 Only when the input has no usable label.
 
 ```typescript
-// /login email field: its <label> is not associated (app accessibility bug), so placeholder is intentional
+// Only when getByRole/getByLabel can't target the field. Nothing in the suite needs this today.
 page.getByPlaceholder('you@example.com')
 ```
 
@@ -48,7 +48,7 @@ page.getByText(/You're approved/i)
 ```
 
 ### Priority 5 — `getByTestId()`
-Only if ZincBank adds `data-testid` attributes (none found so far).
+ZincBank does have `data-testid` attributes (on `/login`: `login-page`, `login-email-input`, `login-password-input`, `login-submit`, `login-apply-link`, observed 2026-09-29). Use them only when no role/label/text locator uniquely targets the element. `npx playwright cli generate-locator` often suggests them first, so re-pick by this priority.
 
 ### Priority 6 — `locator()` with CSS
 Only when no semantic locator can target the element. Keep it specific and add a comment explaining why.

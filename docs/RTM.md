@@ -1,6 +1,6 @@
 # Requirement Traceability Matrix
 
-Last updated: 2026-09-29. Mappings were confirmed with `grep` against `features/`, `step-definitions/` and `pages/` on that date. Results come from `npm test` at 13:26 the same day.
+Last updated: 2026-09-29. Mappings were confirmed with `grep` against `features/`, `step-definitions/` and `pages/` on that date. Results come from `npm test` at 13:42 the same day (also passed at 13:26).
 
 ## Automated
 
