@@ -20,7 +20,8 @@
     "support/**/*.ts",
     "config/**/*.ts",
     "test-data/**/*.ts",
-    "utils/**/*.ts"
+    "utils/**/*.ts",
+    "scripts/**/*.ts"
   ],
   "exclude": ["node_modules", "dist", "reports", "screenshots"]
 }

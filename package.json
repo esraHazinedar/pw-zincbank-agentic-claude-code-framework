@@ -4,11 +4,12 @@
   "private": true,
   "description": "Playwright + Cucumber BDD UI automation framework",
   "scripts": {
-    "test": "cucumber-js --profile default",
-    "test:smoke": "cucumber-js --profile smoke",
-    "test:regression": "cucumber-js --profile regression",
-    "signup": "cucumber-js --profile signup",
-    "test:debug": "PWDEBUG=1 cucumber-js --profile default"
+    "test": "cucumber-js --profile default; code=$?; npm run report:rtm -- 'npm test'; exit $code",
+    "test:smoke": "cucumber-js --profile smoke; code=$?; npm run report:rtm -- 'npm run test:smoke'; exit $code",
+    "test:regression": "cucumber-js --profile regression; code=$?; npm run report:rtm -- 'npm run test:regression'; exit $code",
+    "signup": "cucumber-js --profile signup; code=$?; npm run report:rtm -- 'npm run signup'; exit $code",
+    "test:debug": "PWDEBUG=1 cucumber-js --profile default",
+    "report:rtm": "ts-node scripts/generateRtmReport.ts"
   },
   "keywords": [],
   "author": "",

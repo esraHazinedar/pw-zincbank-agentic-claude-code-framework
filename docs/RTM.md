@@ -36,4 +36,4 @@ Matches the **Known Application Surface** table in `ARCHITECTURE.md` (Rule 6).
 ## Open items
 
 - **ZTM IDs:** only SIGNIN-01 (ZTM-5) and SIGNIN-02 (ZTM-6) have one. The others need IDs from the test-management system. Once assigned, add them as tags and scenario-name prefixes, and replace "Unassigned" here and in the catalogs.
-- **Coverage report:** `docs/coverage/*.html` has not been created yet.
+- **Coverage report:** `docs/coverage/rtm-coverage-report.html` is regenerated after every `npm test`, `test:smoke`, `test:regression` and `signup` run (or on demand with `npm run report:rtm`). It maps test cases to scenarios, shows the latest run's results, and flags RTM rows that no longer match the feature files or Page Objects.

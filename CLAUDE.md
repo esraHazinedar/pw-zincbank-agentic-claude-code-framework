@@ -13,6 +13,8 @@ npm test                           # run all scenarios except @signup
 npm run test:smoke                 # run scenarios tagged @smoke
 npm run test:regression            # run scenarios tagged @regression
 npm run test:debug                 # run with PWDEBUG=1
+npm run report:rtm                 # regenerate docs/coverage/rtm-coverage-report.html from docs/RTM.md + the last run
+                                   # (runs automatically after test, test:smoke, test:regression and signup)
 
 npx cucumber-js --profile default --tags @ZTM-5     # run a single tag/scenario
 HEADLESS=false npm run test:smoke                    # run with a visible browser

@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZincBank RTM Coverage</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --panel: #ffffff; --text: #1d1d1b; --dim: #6b6b66; --line: #e3e3de;
+    --pass: #1f7a4d; --pass-bg: #e3f3ea; --fail: #b3261e; --fail-bg: #fbe7e5;
+    --warn: #8a5a00; --warn-bg: #fdf1d8; --muted-bg: #ececea; --accent: #2f5bd3;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #151514; --panel: #1f1f1d; --text: #ececea; --dim: #9c9c96; --line: #34342f;
+      --pass: #6fd3a0; --pass-bg: #1d3a2b; --fail: #f28b82; --fail-bg: #45201d;
+      --warn: #f2c46b; --warn-bg: #3d3018; --muted-bg: #2c2c29; --accent: #8fa8ff;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 1200px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { font-size: 24px; margin: 0 0 4px; }
+  h2 { font-size: 17px; margin: 36px 0 12px; }
+  .dim { color: var(--dim); font-size: 12px; }
+  .meta { color: var(--dim); margin-bottom: 20px; }
+  .stats { display: flex; flex-wrap: wrap; gap: 12px; }
+  .stat { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; min-width: 120px; }
+  .stat b { display: block; font-size: 22px; }
+  .stat span { color: var(--dim); font-size: 12px; }
+  .stat.pass b { color: var(--pass); } .stat.fail b { color: var(--fail); } .stat.warn b { color: var(--warn); }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  th { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--dim); font-weight: 600; }
+  tr:last-child td { border-bottom: 0; }
+  code { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--accent); }
+  .tag { display: inline-block; font: 12px ui-monospace, Menlo, monospace; background: var(--muted-bg); border-radius: 4px; padding: 1px 6px; margin: 1px 0; }
+  .badge { display: inline-block; font-size: 12px; font-weight: 600; border-radius: 999px; padding: 2px 10px; white-space: nowrap; }
+  .badge.pass { color: var(--pass); background: var(--pass-bg); }
+  .badge.fail { color: var(--fail); background: var(--fail-bg); }
+  .badge.warn { color: var(--warn); background: var(--warn-bg); }
+  .badge.muted { color: var(--dim); background: var(--muted-bg); }
+  details summary { cursor: pointer; font-weight: 600; white-space: nowrap; }
+  details.pass summary { color: var(--pass); } details.warn summary { color: var(--warn); } details.fail summary { color: var(--fail); }
+  ul.checks { list-style: none; margin: 8px 0 0; padding: 0; }
+  ul.checks li { padding: 2px 0; }
+  ul.checks li span { display: inline-block; width: 16px; font-weight: 700; }
+  ul.checks li.pass span { color: var(--pass); } ul.checks li.warn span { color: var(--warn); } ul.checks li.fail span { color: var(--fail); }
+  .summary-checks { padding: 12px 16px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>ZincBank RTM Coverage</h1>
+  <div class="meta">
+    Generated 2026-09-29 13:59:22 by <code>npm test</code><br>
+    Run results: <code>reports/cucumber-report.json</code> written 2026-09-29 13:59:21 ·
+    Mapping: <code>docs/RTM.md</code> (last updated 2026-09-29)
+  </div>
+
+  <h2>Latest run</h2>
+  <div class="stats"><div class="stat"><b>3</b><span>scenarios in run</span></div>
+       <div class="stat pass"><b>3</b><span>passed</span></div>
+       <div class="stat fail"><b>0</b><span>failed / undefined</span></div>
+       <div class="stat warn"><b>0</b><span>skipped</span></div>
+       <div class="stat"><b>10.9 s</b><span>scenario time</span></div></div>
+
+  <h2>RTM checks</h2>
+  <div class="stats">
+    <div class="stat pass"><b>23</b><span>passed</span></div>
+    <div class="stat warn"><b>0</b><span>warnings</span></div>
+    <div class="stat fail"><b>0</b><span>failed</span></div>
+  </div>
+  <div class="panel summary-checks" style="margin-top:12px"><ul class="checks"><li class="pass"><span>✓</span> All 4 scenarios in features/ are mapped to at least one test case</li></ul></div>
+
+  <h2>Test case → scenario</h2>
+  <div class="panel"><table>
+    <thead><tr><th>Case</th><th>ZTM</th><th>Requirement</th><th>Scenario</th><th>Tags</th><th>Latest run</th><th>RTM checks</th></tr></thead>
+    <tbody>
+<tr>
+  <td><strong>SIGNIN-01</strong></td>
+  <td>ZTM-5</td>
+  <td>Registered user can sign in and land on the dashboard</td>
+  <td><code>features/login.feature</code><br>ZTM-5: successful sign-in redirects to the dashboard</td>
+  <td><span class="tag">@smoke</span> <span class="tag">@ZTM-5</span></td>
+  <td><span class="badge pass">Passed</span><div class="dim">4.6 s</div></td>
+  <td><details class="pass"><summary>All checks pass</summary><ul class="checks"><li class="pass"><span>✓</span> Scenario exists in the feature file</li><li class="pass"><span>✓</span> RTM tags match the feature tags</li><li class="pass"><span>✓</span> ZTM-5 matches the tag and scenario-name prefix</li><li class="pass"><span>✓</span> step-definitions/login.steps.ts exists</li><li class="pass"><span>✓</span> All 5 Page Object methods exist</li></ul></details></td>
+</tr>
+<tr>
+  <td><strong>SIGNIN-02</strong></td>
+  <td>ZTM-6</td>
+  <td>Wrong password is rejected with a generic error</td>
+  <td><code>features/login.feature</code><br>ZTM-6: wrong password shows a generic error</td>
+  <td><span class="tag">@regression</span> <span class="tag">@ZTM-6</span></td>
+  <td><span class="badge pass">Passed</span><div class="dim">2.6 s</div></td>
+  <td><details class="pass"><summary>All checks pass</summary><ul class="checks"><li class="pass"><span>✓</span> Scenario exists in the feature file</li><li class="pass"><span>✓</span> RTM tags match the feature tags</li><li class="pass"><span>✓</span> ZTM-6 matches the tag and scenario-name prefix</li><li class="pass"><span>✓</span> step-definitions/login.steps.ts exists</li><li class="pass"><span>✓</span> All 5 Page Object methods exist</li></ul></details></td>
+</tr>
+<tr>
+  <td><strong>DASH-01</strong></td>
+  <td>Unassigned</td>
+  <td>Stored session opens the dashboard without the login UI</td>
+  <td><code>features/dashboard.feature</code><br>Reuse a stored session instead of logging in again</td>
+  <td><span class="tag">@authenticated</span> <span class="tag">@regression</span></td>
+  <td><span class="badge pass">Passed</span><div class="dim">3.6 s</div></td>
+  <td><details class="pass"><summary>All checks pass</summary><ul class="checks"><li class="pass"><span>✓</span> Scenario exists in the feature file</li><li class="pass"><span>✓</span> RTM tags match the feature tags</li><li class="pass"><span>✓</span> step-definitions/dashboard.steps.ts exists</li><li class="pass"><span>✓</span> All 2 Page Object methods exist</li></ul></details></td>
+</tr>
+<tr>
+  <td><strong>SIGNUP-01</strong></td>
+  <td>Unassigned</td>
+  <td>Visitor can complete the 6-step application and open a checking account</td>
+  <td><code>features/signup.feature</code><br>Open a new checking account</td>
+  <td><span class="tag">@signup</span></td>
+  <td><span class="badge muted">Not in this run</span></td>
+  <td><details class="pass"><summary>All checks pass</summary><ul class="checks"><li class="pass"><span>✓</span> Scenario exists in the feature file</li><li class="pass"><span>✓</span> RTM tags match the feature tags</li><li class="pass"><span>✓</span> step-definitions/signup.steps.ts exists</li><li class="pass"><span>✓</span> All 9 Page Object methods exist</li></ul></details></td>
+</tr>
+<tr>
+  <td><strong>SIGNUP-03</strong></td>
+  <td>Unassigned</td>
+  <td>Continue advances the wizard one step</td>
+  <td><code>features/signup.feature</code><br><em>covered within</em> Open a new checking account</td>
+  <td><span class="tag">@signup</span></td>
+  <td><span class="badge muted">Not in this run</span></td>
+  <td><details class="pass"><summary>All checks pass</summary><ul class="checks"><li class="pass"><span>✓</span> Scenario exists in the feature file</li><li class="pass"><span>✓</span> RTM tags match the feature tags</li><li class="pass"><span>✓</span> step-definitions/signup.steps.ts exists</li><li class="pass"><span>✓</span> All 2 Page Object methods exist</li></ul></details></td>
+</tr>
+    </tbody>
+  </table></div>
+
+  <h2>Scenario → test cases</h2>
+  <div class="panel"><table>
+    <thead><tr><th>Feature</th><th>Scenario</th><th>Tags</th><th>Test cases</th><th>Latest run</th></tr></thead>
+    <tbody>
+<tr>
+  <td><code>features/dashboard.feature</code></td>
+  <td>Reuse a stored session instead of logging in again</td>
+  <td><span class="tag">@authenticated</span> <span class="tag">@regression</span></td>
+  <td><strong>DASH-01</strong></td>
+  <td><span class="badge pass">Passed</span></td>
+</tr>
+<tr>
+  <td><code>features/login.feature</code></td>
+  <td>ZTM-5: successful sign-in redirects to the dashboard</td>
+  <td><span class="tag">@smoke</span> <span class="tag">@ZTM-5</span></td>
+  <td><strong>SIGNIN-01</strong></td>
+  <td><span class="badge pass">Passed</span></td>
+</tr>
+<tr>
+  <td><code>features/login.feature</code></td>
+  <td>ZTM-6: wrong password shows a generic error</td>
+  <td><span class="tag">@regression</span> <span class="tag">@ZTM-6</span></td>
+  <td><strong>SIGNIN-02</strong></td>
+  <td><span class="badge pass">Passed</span></td>
+</tr>
+<tr>
+  <td><code>features/signup.feature</code></td>
+  <td>Open a new checking account</td>
+  <td><span class="tag">@signup</span></td>
+  <td><strong>SIGNUP-01</strong>, <strong>SIGNUP-03</strong></td>
+  <td><span class="badge muted">Not in this run</span></td>
+</tr>
+    </tbody>
+  </table></div>
+
+  <h2>Not automated / not yet automated</h2>
+  <div class="panel"><table>
+    <thead><tr><th>Case</th><th>Requirement</th><th>Status</th><th>Reason</th></tr></thead>
+    <tbody>
+<tr><td><strong>DASH-02</strong></td><td>Dashboard shows total deposit balance and accounts list</td><td>Not yet automated</td><td>No scenario exists</td></tr>
+<tr><td><strong>DASH-03</strong></td><td>Navigation bar links to all main sections</td><td>Not yet automated</td><td>No scenario exists. Shared component: automate once</td></tr>
+<tr><td><strong>DASH-04</strong></td><td>Recent activity empty state</td><td>Not automated</td><td>Cosmetic, low business risk</td></tr>
+<tr><td><strong>DASH-05</strong></td><td>Theme toggle</td><td>Not automated</td><td>Decorative, no business impact</td></tr>
+<tr><td><strong>SIGNUP-02</strong></td><td>Checking selected by default on step 1</td><td>Not yet automated</td><td>Observed but not asserted; chooseCheckingAccount() only checks it if needed</td></tr>
+    </tbody>
+  </table></div>
+</main>
+</body>
+</html>
