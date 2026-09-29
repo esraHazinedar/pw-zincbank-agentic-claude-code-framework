@@ -1,0 +1,26 @@
+{
+  "name": "zincbank-test-framework",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Playwright + Cucumber BDD UI automation framework",
+  "scripts": {
+    "test": "cucumber-js --profile default",
+    "test:smoke": "cucumber-js --profile smoke",
+    "test:regression": "cucumber-js --profile regression",
+    "signup": "cucumber-js --profile signup",
+    "test:debug": "PWDEBUG=1 cucumber-js --profile default"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@cucumber/cucumber": "^13.2.1",
+    "@faker-js/faker": "^10.6.0",
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^22.20.4",
+    "dotenv": "^18.0.4",
+    "playwright": "^1.63.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
