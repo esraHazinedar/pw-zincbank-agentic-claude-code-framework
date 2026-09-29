@@ -1,6 +1,8 @@
 ---
 name: pw-bdd-new-scenario
 description: Write a new Cucumber scenario for the ZincBank Playwright framework from user-provided test steps. Explores the live app with the Playwright CLI (`npx playwright cli`) because ZincBank's source code is not available, then writes the Gherkin feature, step definitions, and Page Object methods, runs the scenario with tracing, debugs it if needed, and updates docs/test-cases and docs/RTM.md. Use when the user asks to add, write, automate, or create a new test/scenario/feature for ZincBank.
+model: sonnet
+effort: medium
 ---
 
 Write a new Cucumber scenario for the provided test steps by exploring the live ZincBank app with the Playwright CLI.

@@ -1,6 +1,8 @@
 ---
 name: pw-bdd-scenario-audit
 description: Audit recently written Cucumber scenario code in the ZincBank Playwright framework as a fresh pair of eyes. Reviews only the uncommitted git diff (features, step definitions, Page Objects, support, test-data, docs) against the project's `.claude/rules/`, verifies locators against the live DOM with the Playwright CLI, reports numbered findings by severity, and optionally applies fixes.
+model: sonnet
+effort: high
 ---
 
 Audit the most recent uncommitted scenario changes against the project's rules. Treat this as a fresh review: don't assume the previous agent's choices were correct.

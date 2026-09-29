@@ -1,6 +1,8 @@
 ---
 name: pw-bdd-debug-scenario
 description: Debug a failing or flaky Cucumber scenario in the ZincBank Playwright framework. Re-runs the single scenario with Playwright tracing forced on (TRACE=on), analyzes the trace with the `npx playwright trace` CLI, classifies the root cause (test bug / app bug / environment), and fixes it in the Page Object or step definition following the project rules. Use when the user says a scenario/feature/step is failing, broken, flaky, or asks why a Cucumber run failed in this project.
+model: opus
+effort: high
 ---
 
 # Debug a Failing Cucumber Scenario

@@ -28,6 +28,21 @@ npm run signup                                       # create a fresh test accou
 rm -rf .auth                                         # force re-authentication (stale/expired session)
 ```
 
+## Model & effort
+
+Follows Anthropic's guidance in [Choosing a model and effort level](https://code.claude.com/docs/en/model-config): Opus for complex reasoning, Sonnet for daily coding, Haiku for simple tasks; `medium` effort for clear-scope work, `high` where verification matters (bug fixing, reviews), `xhigh`/`max` only for hard problems (costly, prone to overthinking). Each skill pins its own `model`/`effort` in its `SKILL.md` frontmatter; the override lasts for the current turn and your session model resumes on your next prompt.
+
+| Work | Model | Effort | Where it is set |
+|---|---|---|---|
+| New scenario (`pw-bdd-new-scenario`) | `sonnet` | `medium` | Skill frontmatter |
+| Debug a failing scenario (`pw-bdd-debug-scenario`) | `opus` | `high` | Skill frontmatter |
+| Audit scenario changes (`pw-bdd-scenario-audit`) | `sonnet` | `high` | Skill frontmatter |
+| Coverage planning (`pw-bdd-coverage-planner`) | `opus` | `medium` | Skill frontmatter |
+| Everyday edits, running tests, small refactors | `sonnet` | `medium` | `/model sonnet`, `/effort medium` |
+| Doc wording fixes, regenerating the RTM report | `haiku` | `low` | `/model haiku` |
+| Architecture changes (`ARCHITECTURE.md`, hooks, World) | `opus` | `medium`–`high` | `/model opus` |
+| Security review of changes | `opus` | `high` or above | `/model opus` |
+
 ## Environment
 
 Requires a `.env` file (gitignored) with `BASE_URL`, `USERNAME`, `PASSWORD` for a real, registered ZincBank account. If none exists yet, run the `@signup` scenario above — it creates one and populates `.env` automatically.

@@ -1,6 +1,8 @@
 ---
 name: pw-bdd-coverage-planner
 description: Plan Cucumber scenario coverage for a ZincBank feature or flow. Enters plan mode, reviews existing features/steps/docs, explores the live app read-only with the Playwright CLI, brainstorms happy/edge/negative cases as Gherkin-level scenarios, and saves the approved plan to `.claude/pw-plans/` for `pw-bdd-new-scenario` to implement.
+model: opus
+effort: medium
 ---
 
 Build a coverage plan for a parent scenario in the ZincBank Cucumber + Playwright framework. The output is a markdown plan in `.claude/pw-plans/` that `pw-bdd-new-scenario` can implement one case at a time.
